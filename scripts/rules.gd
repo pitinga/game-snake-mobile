@@ -38,7 +38,7 @@ func _place_food() -> void:
 
 
 func steer(direction: Vector2i) -> void:
-	if direction != -heading and direction != Vector2i.ZERO:
+	if (absi(direction.x) + absi(direction.y) == 1) and direction != -heading:
 		next_heading = direction
 
 
@@ -61,7 +61,7 @@ func tap(p: Vector2) -> void:
 func tick(delta: float) -> void:
 	elapsed += delta
 	var interval: float = maxf(0.08, 0.17 - score * 0.004)
-	if elapsed >= interval:
+	while elapsed >= interval and not ended:
 		elapsed -= interval
 		advance()
 
